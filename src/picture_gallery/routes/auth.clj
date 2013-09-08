@@ -35,15 +35,25 @@
          (password-field {:tabindex 3} "pass1")) 
        (submit-button {:tabindex 4} "create account"))))
  
-(defn handle-registration [id pass pass1] 
-  (if (valid? id pass pass1)
-    (do
-      (db/create-user {:id id :pass (crypt/encrypt pass)}) 
-      (session/put! :user id)
-      (resp/redirect "/"))
-    (registeration-page id))) 
-
-(defroutes auth-routes 
+ (defn format-error [id ex] 
+   (cond
+     (and (instance? org.postgresql.util.PSQLException ex) 
+       (= 0 (.getErrorCode ex)))
+     (str "The user with id " id " already exists!")      
+     :else
+     "An error has occured while processing the request"))
+ (defn handle-registration [id pass pass1] 
+    (if (valid? id pass pass1)
+      (try
+        (db/create-user {:id id :pass (crypt/encrypt pass)}) 
+        (session/put! :user id)
+        (resp/redirect "/")
+        (catch Exception ex
+          (vali/rule false [:id (format-error id ex)])
+          (registeration-page)))
+      (registeration-page id)))
+ 
+ (defroutes auth-routes 
   (GET "/register" [] 
     (registeration-page))
   
