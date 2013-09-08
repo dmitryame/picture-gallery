@@ -1,4 +1,5 @@
 /target
+.settings/ccw.repl.cmdhistory.prefs
 /lib
 /classes
 /checkouts
