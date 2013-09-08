@@ -1,7 +1,9 @@
 (ns picture-gallery.routes.auth 
   (:require [hiccup.form :refer :all]
     [compojure.core :refer :all]    [picture-gallery.routes.home :refer :all]    [picture-gallery.views.layout :as layout]    [noir.session :as session]    [noir.response :as resp]
-    [noir.validation :as vali]))
+    [noir.validation :as vali]
+    [noir.util.crypt :as crypt]
+    [picture-gallery.models.db :as db]))
 
 (defn valid? [id pass pass1] 
   (vali/rule (vali/has-value? id)
@@ -35,9 +37,11 @@
  
 (defn handle-registration [id pass pass1] 
   (if (valid? id pass pass1)
-    (do (session/put! :user id) 
+    (do
+      (db/create-user {:id id :pass (crypt/encrypt pass)}) 
+      (session/put! :user id)
       (resp/redirect "/"))
-    (registeration-page id)))
+    (registeration-page id))) 
 
 (defroutes auth-routes 
   (GET "/register" [] 
