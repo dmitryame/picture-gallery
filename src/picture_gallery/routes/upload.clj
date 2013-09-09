@@ -5,6 +5,7 @@
            [hiccup.util :refer [url-encode]]
            [picture-gallery.views.layout :as layout]
            [picture-gallery.models.db :as db]
+           [picture-gallery.util :refer [gallery-path thumb-prefix]]
            [noir.io :refer [resource-path]]
            [noir.session :as session]
            [noir.response :as resp]
@@ -18,10 +19,6 @@
            javax.imageio.ImageIO))
 
 (def thumb-size 150)
-(def thumb-prefix "thumb_")
-
-(defn gallery-path []
-  (str (resource-path) "img" File/separator (session/get :user) File/separator))
 
 (defn upload-page [info]   
   (layout/common
