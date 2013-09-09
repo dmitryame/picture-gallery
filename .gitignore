@@ -1,5 +1,6 @@
 /target
 .settings/ccw.repl.cmdhistory.prefs
+/bin
 /lib
 /classes
 /checkouts
@@ -10,4 +11,3 @@ pom.xml
 .lein-failures
 .lein-plugins
 .lein-env
-bin/**
