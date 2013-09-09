@@ -62,22 +62,22 @@
         ;;save the file and create the thumbnail
         (noir.io/upload-file
           (str File/separator "img"
-               File/separator
-               (session/get :user)
-               File/separator)
+            File/separator
+            (session/get :user)
+            File/separator)
           file)
         (save-thumbnail file) 
         (db/add-image (session/get :user) (:filename file))
         ;;display the thumbnail 
         (image {:height "150px"}
           (str "/img/" 
-               (session/get :user)
-               "/"
-               thumb-prefix
-               (url-encode (:filename file))))
+            (session/get :user)
+            "/"
+            thumb-prefix
+            (url-encode (:filename file))))
         ;;handle errors
-      (catch Exception ex
-        (str "error uploading file " (.getMessage ex)))))))
+        (catch Exception ex
+          (str "error uploading file " (.getMessage ex)))))))
 
 
 (defroutes upload-routes  (GET "/upload" [info] (restricted (upload-page info)))  (POST "/upload" [file] (restricted (handle-upload file))))
