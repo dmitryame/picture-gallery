@@ -4,6 +4,7 @@
            [hiccup.element :refer [image]]
            [hiccup.util :refer [url-encode]]
            [picture-gallery.views.layout :as layout]
+           [picture-gallery.models.db :as db]
            [noir.io :refer [resource-path]]
            [noir.session :as session]
            [noir.response :as resp]
@@ -66,6 +67,7 @@
                File/separator)
           file)
         (save-thumbnail file) 
+        (db/add-image (session/get :user) (:filename file))
         ;;display the thumbnail 
         (image {:height "150px"}
           (str "/img/" 
