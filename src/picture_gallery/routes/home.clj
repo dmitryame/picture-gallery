@@ -5,7 +5,8 @@
 
 ;(defn home [] 
 ;  (layout/common [:h1 "Hello World!"]))
-(defn home []  (layout/common [:h1 "Hello " (session/get :user)]))
+(defn home []
+  (layout/common [:h1 "Hello " (session/get :user)]))
 
 (defroutes home-routes
   (GET "/" [] (home)))
