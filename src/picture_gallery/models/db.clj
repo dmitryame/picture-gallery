@@ -7,8 +7,10 @@
    :user "admin"
    :password "admin"})
 
-(defn create-user [user] 
-  (sql/with-connection    db    (sql/insert-record :users user)))
+(defmacro with-db [f & body] 
+  `(sql/with-connection ~db (~f ~@body)))
 
-(defn get-user [id] 
-  (sql/with-connection          db          (sql/with-query-results res ["select * from users where id = ?" id] (first res))))
+(defn create-user [user]
+  (with-db sql/insert-record :users user))
+(defn get-user [id]
+   (with-db sql/with-query-results res ["select * from users where id = ?" id] (first res)))
