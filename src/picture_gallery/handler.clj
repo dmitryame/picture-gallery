@@ -1,12 +1,3 @@
-;(ns picture-gallery.handler
-;  (:require [compojure.core :refer [defroutes routes]]
-;            [ring.middleware.resource :refer [wrap-resource]]
-;            [ring.middleware.file-info :refer [wrap-file-info]]
-;            [hiccup.middleware :refer [wrap-base-url]]
-;            [compojure.handler :as handler]
-;            [compojure.route :as route]
-;            [picture-gallery.routes.home :refer [home-routes]]
-;            [noir.util.middleware :as noir-middleware]))
 (ns picture-gallery.handler(:require [compojure.route :as route]          [compojure.core :refer [defroutes]]          [noir.util.middleware :as noir-middleware]          [picture-gallery.routes.home :refer [home-routes]]
           [picture-gallery.routes.auth :refer [auth-routes]]
           [picture-gallery.routes.upload :refer [upload-routes]] ))
