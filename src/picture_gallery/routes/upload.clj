@@ -76,5 +76,20 @@
         (catch Exception ex
           (str "error uploading file " (.getMessage ex)))))))
 
+(defn delete-image [userid name] 
+  (try
+    (db/delete-image userid name)
+    (io/delete-file (str (gallery-path) name))
+    (io/delete-file (str (gallery-path) thumb-prefix name)) 
+    "ok"
+    (catch Exception ex (.getMessage ex))))
 
-(defroutes upload-routes  (GET "/upload" [info] (restricted (upload-page info)))  (POST "/upload" [file] (restricted (handle-upload file))))
+(defn delete-images [names]
+  (let [userid (session/get :user)]
+    (resp/json
+      (for [name names] {:name name :status (delete-image userid name)}))))
+
+(defroutes upload-routes
+  (GET "/upload" [info] (restricted (upload-page info)))
+  (POST "/upload" [file] (restricted (handle-upload file)))
+  (POST "/delete" [names] (restricted (delete-images names))))
