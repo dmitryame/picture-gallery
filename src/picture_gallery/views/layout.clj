@@ -7,9 +7,12 @@
     [ring.util.response :refer [response]])
   (:import compojure.response.Renderable))
 
+(include-js "//code.jquery.com/jquery-2.0.2.min.js" 
+  "/js/colors.js"
+  "/js/site.js")
 
 (defn make-menu [& items]
-  [:div (for [item items] [:div.menuitem item])])
+  [:div#usermenu (for [item items] [:div.menuitem item])])
 
 (defn guest-menu []
   (make-menu
@@ -19,6 +22,7 @@
       (text-field {:placeholder "screen name"} "id") 
       (password-field {:placeholder "password"} "pass") 
       (submit-button "login"))))
+
 (defn user-menu [user] 
  (make-menu
    (link-to "/" "home")
