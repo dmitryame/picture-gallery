@@ -12,3 +12,4 @@ pom.xml
 .lein-env
 .settings/ccw.repl.cmdhistory.prefs
 .nrepl-port
+nohup.out
