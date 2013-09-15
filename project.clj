@@ -7,7 +7,9 @@
                  [ring-server "0.2.8"]
                  [postgresql/postgresql "9.1-901.jdbc4"] 
                  [org.clojure/java.jdbc "0.2.3"] 
-                 [lib-noir "0.6.8"]]
+                 [lib-noir "0.6.8"]
+                 [com.taoensso/timbre "2.1.2"]
+                 [com.postspectacular/rotor "0.1.0"]]
   :plugins [[lein-ring "0.8.5"]]
   :ring {:handler picture-gallery.handler/war-handler
          :init picture-gallery.handler/init

@@ -10,7 +10,8 @@
            [noir.session :as session]
            [noir.response :as resp]
            [clojure.java.io :as io]
-           [noir.util.route :refer [restricted]])
+           [noir.util.route :refer [restricted]]
+           [taoensso.timbre :refer [trace debug info warn error fatal]])
   (:import [java.io File FileInputStream FileOutputStream]
            java.awt.image.BufferedImage
            java.awt.RenderingHints
@@ -82,7 +83,9 @@
     (io/delete-file (str (gallery-path) name))
     (io/delete-file (str (gallery-path) thumb-prefix name)) 
     "ok"
-    (catch Exception ex (.getMessage ex))))
+    (catch Exception ex
+      (error ex "an error has occured while deleting" name)
+      (.getMessage ex))))
 
 (defn delete-images [names]
   (let [userid (session/get :user)]
