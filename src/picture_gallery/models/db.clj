@@ -1,11 +1,13 @@
 (ns picture-gallery.models.db
-   (:require [clojure.java.jdbc :as sql]))
+  (:require [clojure.java.jdbc :as sql]
+            [environ.core :refer [env]]))
 
 (def db
   {:subprotocol "postgresql"
-   :subname "//localhost/gallery" 
-   :user "admin"
-   :password "admin"})
+   :subname (env :db-url)
+   :user (env :db-user)
+   :password (env :db-pass)})
+
 
 (defmacro with-db [f & body] 
   `(sql/with-connection ~db (~f ~@body)))
