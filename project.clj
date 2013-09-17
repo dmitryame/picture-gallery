@@ -24,10 +24,10 @@
            :auto-reload? false}
     :env {:port 8080
           :db-url "//localhost/gallery" :db-user "admin"
-          :db-pass "admin"}}
-   :dev
-   {:dependencies [[ring-mock "0.1.3"]
-                   [ring/ring-devel "1.1.8"]]
-    :env {:port 8080
-          :db-url "//localhost/gallery" :db-user "admin"
-          :db-pass "secretProdPasword"}}})
+          :db-pass "admin"}}}
+  :dev
+  {:dependencies [[ring-mock "0.1.3"]
+                  [ring/ring-devel "1.1.8"]]
+   :env {:port 8080
+         :db-url "//localhost/gallery" :db-user "admin"
+         :db-pass "secretProdPasword"}})
