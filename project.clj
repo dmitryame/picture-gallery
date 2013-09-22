@@ -21,7 +21,8 @@
                  [org.clojure/clojurescript "0.0-1806"]
                  [domina "1.0.0"]
                  [cljs-ajax "0.2.0"]
-                 [ring-middleware-format "0.3.1"]]
+                 [ring-middleware-format "0.3.1"]
+                 [lobos "1.0.0-beta1"]]
   :plugins [[lein-ring "0.8.7"]
             [lein-cljsbuild "0.3.2"]]
   :ring {:handler picture-gallery.handler/war-handler

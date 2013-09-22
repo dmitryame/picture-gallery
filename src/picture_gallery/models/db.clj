@@ -1,15 +1,12 @@
 (ns picture-gallery.models.db
   (:require [clojure.java.jdbc :as sql]
             [korma.db :refer [defdb transaction]]
-            [korma.core :refer :all]))
+            [korma.core :refer :all]
+            [picture-gallery.models.schema :as schema]))
 
-(def db 
-  {:subprotocol "postgresql"
-   :subname "//localhost/gallery"
-   :user "admin"
-   :password "admin"})
+(defdb db schema/db-spec)
 
-(defdb korma-db db)
+;; (defdb korma-db db)
 
 (defentity users)
 

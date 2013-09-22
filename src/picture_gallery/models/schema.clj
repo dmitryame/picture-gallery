@@ -1,17 +1,23 @@
 (ns picture-gallery.models.schema  
-  (:require [picture-gallery.models.db :refer :all]
-            [clojure.java.jdbc :as sql]))
+ (:use [lobos.core :only (defcommand migrate)])
+  (:require [noir.io :as io]
+            [lobos.migration :as lm]))
 
-(defn create-users-table []
-  (sql/with-connection db
-    (sql/create-table 
-      :users
-      [:id "varchar(32) PRIMARY KEY"]      
-      [:pass "varchar(100)"])))
+(def db-spec
+  {:subprotocol "postgresql"
+   :subname "//localhost/gallery"
+   :user "admin"
+   :password "admin"})
 
-(defn create-images-table []
-  (sql/with-connection db
-    (sql/create-table       
-      :images
-      [:userid "varchar(32)"]
-      [:name "varchar(100)"])))
+
+(defcommand pending-migrations []
+  (lm/pending-migrations db-spec sname))
+
+(defn actualized?
+  "checks if there are no pending migrations"
+  []
+  (empty? (pending-migrations)))
+
+(def actualize migrate)
+
+
