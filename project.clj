@@ -22,18 +22,26 @@
                  [domina "1.0.0"]
                  [cljs-ajax "0.2.0"]
                  [ring-middleware-format "0.3.1"]
-                 [lobos "1.0.0-beta1"]]
+                 [lobos "1.0.0-beta1"]
+                 [environ "0.4.0"]]
   :plugins [[lein-ring "0.8.7"]
-            [lein-cljsbuild "0.3.2"]]
+            [lein-cljsbuild "0.3.2"]
+            [lein-environ "0.4.0"]]
   :ring {:handler picture-gallery.handler/war-handler
          :init picture-gallery.handler/init
          :destroy picture-gallery.handler/destroy}
   :profiles
   {:production
    {:ring
-    {:open-browser? false, :stacktraces? false, :auto-reload? false}}
+    {:open-browser? false, :stacktraces? false, :auto-reload? false}
+    :env {:pg-db-url "//localhost/gallery"
+          :pg-db-user "admin"
+          :pg-db-pass "secret"}}
    :dev
-   {:dependencies [[ring-mock "0.1.5"] [ring/ring-devel "1.2.0"]]}}
+   {:dependencies [[ring-mock "0.1.5"] [ring/ring-devel "1.2.0"]]
+    :env {:pg-db-url "//localhost/gallery"
+          :pg-db-user "admin"
+          :pg-db-pass "admin4"}}}
   
   :cljsbuild
   {:builds
