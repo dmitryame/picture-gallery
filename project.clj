@@ -24,7 +24,7 @@
                  [ring-middleware-format "0.3.1"]
                  [lobos "1.0.0-beta1"]
                  [environ "0.4.0"]
-                 [commons-fileupload "1.2.2"]]
+                 [commons-fileupload "1.3"]]
   :plugins [[lein-ring "0.8.7"]
             [lein-cljsbuild "0.3.2"]
             [lein-environ "0.4.0"]]
@@ -32,7 +32,8 @@
          :init picture-gallery.handler/init
          :destroy picture-gallery.handler/destroy}
   :profiles
-  {:production
+  {
+   :production
    {:ring
     {:open-browser? false, :stacktraces? false, :auto-reload? false}
     :env {:pg-db-url "//localhost/gallery"
