@@ -41,6 +41,6 @@
 (defn get-gallery-previews []
   (exec-raw
     ["select * from 
-     (select *, row_number() over (partition by userid) as row_number from images) 
+     (select *, row_number() over (partition by userid) as row_number from images ) 
      as rows where row_number = 1" []]
      :results)) 
