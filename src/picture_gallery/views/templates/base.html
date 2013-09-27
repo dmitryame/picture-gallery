@@ -26,35 +26,38 @@
 			<a href="/">home</a>
 		</div>
 		{% if user %}
-			<div class="menuitem">
-				<a href="/upload">upload images</a>
-			</div>
-			<div class="menuitem">
-				<a href="/logout">logout {{user}}</a>
-			</div>
-			<div class="menuitem">
-				<a href="/delete-account">delete account</a>
-			</div>		
+		<div class="menuitem">
+		  <a href="/upload">upload images</a>
+		</div>
+		<div class="menuitem">
+		  <a href="/logout">logout {{user}}</a>
+		</div>
+		<div class="menuitem">
+		  <a href="/delete-account">delete wave</a>
+		</div>		
 		{% else %}
 		<div class="menuitem">
-			<a href="{{context}}/register">register</a>
+		  <a href="{{context}}/register">register</a>
 		</div>
 		<div class="menuitem">
-			<form action="{{context}}/login" method="POST">
-				<input id="id"
-				            name="id" 
-				            placeholder="screen name" 
-				            type="text">
-				<input id="pass" 
-				            name="pass" 
-				            placeholder="password" 
-				            type="password">
-				<input type="submit" value="login">
-			</form>
+		  <form action="{{context}}/login" method="POST">
+		    <input id="id"
+			   name="id" 
+			   placeholder="screen name" 
+			   type="text">
+		    <input id="pass" 
+			   name="pass" 
+			   placeholder="password" 
+			   type="password">
+		    <input type="submit" value="login">
+		  </form>
 		</div>
 		{% endif %}
+                
+                <h1>EchoWaves => Micro Photo Blogging</h1> 
+                
 	</div>
-    {% endblock %}
+        {% endblock %}
 	{% block content %}
 	{% endblock %}
 	

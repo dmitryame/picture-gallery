@@ -18,7 +18,7 @@
 
 (defn valid? [id pass pass1]
   (vali/rule (vali/has-value? id)
-             [:id "user ID is required"])
+             [:id "wave name is required"])
   (vali/rule (vali/min-length? pass 5)
              [:pass "password must be at least 5 characters"]) 
   (vali/rule (= pass pass1)
@@ -35,7 +35,7 @@
   (cond
     (and (instance? org.postgresql.util.PSQLException ex) 
       (= 0 (.getErrorCode ex))) 
-    (str "The user with id " id " already exists!")
+    (str "The wave name " id " already exists!")
     
     :else
     "An error has occured while processing the request"))
